@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{517CA055-62B8-4210-A3E7-1D73A3B614A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaprDemoApp.Api", "src\DaprDemoApp.Api\DaprDemoApp.Api.csproj", "{3A229876-1901-4B82-89C2-428AC936ABD1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaprDemoApp.Web", "src\DaprDemoApp.Web\DaprDemoApp.Web.csproj", "{F71E562A-938D-4C62-BDCB-0B4735F5CB56}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaprDemoApp.Common", "src\DaprDemoApp.Common\DaprDemoApp.Common.csproj", "{97A54481-AE09-481E-B340-AD3333C4DEFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dapr", "dapr", "{D974AF53-79E6-4C1C-9316-6C52FA6A6190}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", "{DCB7582C-AB50-4631-A4D8-15758E2AA4DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "develop", "develop", "{FE7FBCEA-B503-4DB5-9126-4F44AB814924}"
+	ProjectSection(SolutionItems) = preProject
+		dapr\components\develop\local-secretstore.yaml = dapr\components\develop\local-secretstore.yaml
+		dapr\components\develop\rabbitmq-pubsub.yaml = dapr\components\develop\rabbitmq-pubsub.yaml
+		dapr\components\develop\redis-statestore.yaml = dapr\components\develop\redis-statestore.yaml
+		dapr\components\develop\smtp-binding.yaml = dapr\components\develop\smtp-binding.yaml
+		dapr\components\develop\subscription.yml = dapr\components\develop\subscription.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaprDemoApp.Subscriber", "src\DaprDemoApp.Subscriber\DaprDemoApp.Subscriber.csproj", "{655ECEFD-6753-437B-B10C-C4A2D4662EC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A96A4D6F-341E-4736-9F88-26E480BC50C0}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A229876-1901-4B82-89C2-428AC936ABD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A229876-1901-4B82-89C2-428AC936ABD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A229876-1901-4B82-89C2-428AC936ABD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A229876-1901-4B82-89C2-428AC936ABD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F71E562A-938D-4C62-BDCB-0B4735F5CB56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F71E562A-938D-4C62-BDCB-0B4735F5CB56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F71E562A-938D-4C62-BDCB-0B4735F5CB56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F71E562A-938D-4C62-BDCB-0B4735F5CB56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97A54481-AE09-481E-B340-AD3333C4DEFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97A54481-AE09-481E-B340-AD3333C4DEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97A54481-AE09-481E-B340-AD3333C4DEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97A54481-AE09-481E-B340-AD3333C4DEFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{655ECEFD-6753-437B-B10C-C4A2D4662EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{655ECEFD-6753-437B-B10C-C4A2D4662EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{655ECEFD-6753-437B-B10C-C4A2D4662EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{655ECEFD-6753-437B-B10C-C4A2D4662EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3A229876-1901-4B82-89C2-428AC936ABD1} = {517CA055-62B8-4210-A3E7-1D73A3B614A6}
+		{F71E562A-938D-4C62-BDCB-0B4735F5CB56} = {517CA055-62B8-4210-A3E7-1D73A3B614A6}
+		{97A54481-AE09-481E-B340-AD3333C4DEFA} = {517CA055-62B8-4210-A3E7-1D73A3B614A6}
+		{DCB7582C-AB50-4631-A4D8-15758E2AA4DD} = {D974AF53-79E6-4C1C-9316-6C52FA6A6190}
+		{FE7FBCEA-B503-4DB5-9126-4F44AB814924} = {DCB7582C-AB50-4631-A4D8-15758E2AA4DD}
+		{655ECEFD-6753-437B-B10C-C4A2D4662EC1} = {517CA055-62B8-4210-A3E7-1D73A3B614A6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3222C44-4DD2-407F-BC92-AF6055E11177}
+	EndGlobalSection
+EndGlobal

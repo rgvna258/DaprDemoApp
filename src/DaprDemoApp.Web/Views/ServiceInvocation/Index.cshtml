@@ -1,0 +1,34 @@
+﻿@model DaprDemoApp.Web.Models.WithServiceHealthViewModel<IEnumerable<DaprDemoApp.Common.WeatherForecast>>
+
+@{
+    var title = "Service Invocation";
+    var description = "Service invocation enables applications to communicate with each other through well-known endpoints in the form of http or gRPC messages. Dapr provides an endpoint that acts as a combination of a reverse proxy with built-in service discovery, while leveraging built-in distributed tracing and error handling.";
+    ViewData["Title"] = title;
+}
+
+@await Html.PartialAsync("_PageIntro", (title, description))
+
+<div class="text-center">
+    @if (Model.IsDependentServiceHealthy)
+    {
+        <h2 class="mb-5">Weather Forecast</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var weatherForecast in Model.Value!)
+            {
+                <div class="col">
+                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@weatherForecast.Summary</h5>
+                            <p class="card-text">@weatherForecast.TemperatureC° C<br />@weatherForecast.Date</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        @await Html.PartialAsync("_Warning", "Seems like weather API isn't running. Make sure they are up!")
+    }
+</div>
+

@@ -1,0 +1,21 @@
+﻿@model DaprDemoApp.Web.Models.WithServiceHealthViewModel<int>
+
+@{
+    var title = "State Management";
+    var description = "Application state is anything an application wants to preserve beyond a single session. Dapr provides a key/value-based state and query APIs with pluggable state stores for persistence.";
+    ViewData["Title"] = title;
+}
+
+@await Html.PartialAsync("_PageIntro", (title, description))
+
+<div class="text-center">
+    @if (Model.IsDependentServiceHealthy)
+    {
+        <h2>You have refreshed this page</h2>
+        <h3><span class="badge rounded-pill bg-dark">@Model.Value</span> <small>Times</small></h3>
+    }
+    else
+    {
+        @await Html.PartialAsync("_Warning", "Seems like State Store service isn't running. Make sure they are up!")
+    }
+</div>

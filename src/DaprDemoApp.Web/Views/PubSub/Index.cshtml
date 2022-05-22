@@ -1,0 +1,44 @@
+﻿@model DaprDemoApp.Web.Models.PubSubViewModel;
+
+@{
+    var title = "Publish and Subscribe";
+    var description = " Pub/Sub is a loosely coupled messaging pattern where senders (or publishers) publish messages to a topic, to which subscribers subscribe. Dapr supports the pub/sub pattern between applications.";
+    ViewData["Title"] = title;
+
+    var toastBgColor = Model.Status?.IsPublished == true ? "bg-success" : "bg-danger";
+}
+
+@await Html.PartialAsync("_PageIntro", (title, description))
+
+<div class="text-center">
+    <form method="post" asp-action="publish" asp-controller="pubsub">
+        <div class="mb-3 form-floating">
+            <textarea class="form-control" id="messageTextarea" style="height: 100px" asp-for=Message.Content placeholder="Type some message" required></textarea>
+            <label for="messageTextarea">Type some message</label>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Publish" />
+    </form>
+</div>
+
+@if (Model.Status != null)
+{
+    <div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 11">
+        <div id="liveToast" class="toast align-items-center text-white @toastBgColor border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    @Model.Status.Description
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        var toastLiveExample = document.getElementById('liveToast')
+        window.addEventListener('load', function () {
+            var toast = new bootstrap.Toast(toastLiveExample)
+            toast.show()
+        })
+    </script>
+}

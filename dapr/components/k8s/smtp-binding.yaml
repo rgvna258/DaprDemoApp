@@ -1,0 +1,25 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: smtp
+  namespace: daprdemo
+spec:
+  type: bindings.smtp
+  version: v1
+  metadata:
+  - name: host
+    value: "smtp"
+  - name: "port"
+    value: 25
+  - name: "user"
+    value: ""
+  - name: "password"
+    value: ""
+  - name: emailFrom
+    value: "sender@example.com"
+  - name: emailTo
+    value: "receiver@example.com"
+  - name: subject
+    value: "DaprDemoApp Published Message"
+scopes:
+  - daprdemosubscriber

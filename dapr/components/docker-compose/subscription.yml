@@ -1,0 +1,10 @@
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: pubsub
+spec:
+  pubsubname: pubsub
+  route: /getmessage
+  topic: messages
+scopes:
+  - daprdemosubscriber

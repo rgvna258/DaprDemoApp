@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daprdemosubscriber
+  namespace: daprdemo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: daprdemosubscriber
+  template:
+    metadata:
+      labels:
+        app: daprdemosubscriber
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "daprdemosubscriber"
+        dapr.io/app-port: "80"
+        dapr.io/config: "daprconfig"
+    spec:
+      containers:
+      - name: daprdemosubscriber
+        image: rgvna258/daprdemosubscriber:latest
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: daprdemosubscriber
+  namespace: daprdemo
+spec:
+  selector:
+    app: daprdemosubscriber
+  ports:
+  - port: 80
+    targetPort: 80

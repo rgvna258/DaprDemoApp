@@ -1,0 +1,108 @@
+version: '3.4'
+
+services:
+  daprdemoweb:
+    image: ${DOCKER_REGISTRY-}daprdemoweb
+    build:
+      context: .
+      dockerfile: src/DaprDemoApp.Web/Dockerfile
+    ports:
+      - "50001:50001"
+      - "5001:80"
+      
+  daprdemoweb-dapr:
+    image: "daprio/daprd:1.7.2"
+    command: [
+      "./daprd",
+      "-app-id", "daprdemoweb",
+      "-app-port", "80",
+      "-components-path", "/components",
+      "-config", "/config/config.yaml"
+    ]
+    volumes:
+      - "./dapr/components/docker-compose/:/components"
+      - "./dapr/config/docker-compose/:/config"
+    depends_on:
+      - daprdemoweb
+      - daprdemoapi
+      - daprdemosubscriber      
+      - zipkin
+      - redis
+      - rabbitmq
+    network_mode: "service:daprdemoweb"
+
+  daprdemoapi:
+    image: ${DOCKER_REGISTRY-}daprdemoapi
+    build:
+      context: .
+      dockerfile: src/DaprDemoApp.Api/Dockerfile
+    ports:
+      - "50002:50001"
+      
+  daprdemoapi-dapr:
+    image: "daprio/daprd:1.7.2"
+    command: [
+      "./daprd",
+      "-app-id", "daprdemoapi",
+      "-app-port", "80",
+      "-components-path", "/components",
+      "-config", "/config/config.yaml"
+    ]
+    volumes:
+      - "./dapr/components/docker-compose/:/components"
+      - "./dapr/config/docker-compose/:/config"
+    depends_on:
+      - daprdemoapi
+      - zipkin
+    network_mode: "service:daprdemoapi"
+  
+  daprdemosubscriber:
+    image: ${DOCKER_REGISTRY-}daprdemosubscriber
+    build:
+      context: .
+      dockerfile: src/DaprDemoApp.Subscriber/Dockerfile
+    ports:
+      - "50003:50001"
+      
+  daprdemosubscriber-dapr:
+    image: "daprio/daprd:1.7.2"
+    command: [
+      "./daprd",
+      "-app-id", "daprdemosubscriber",
+      "-app-port", "80",
+      "-components-path", "/components",
+      "-config", "/config/config.yaml"
+    ]
+    volumes:
+      - "./dapr/components/docker-compose/:/components"
+      - "./dapr/config/docker-compose/:/config"
+    depends_on:
+      - daprdemosubscriber
+      - zipkin
+      - rabbitmq
+      - smtp
+    network_mode: "service:daprdemosubscriber"
+
+  redis:
+    image: "redis"
+    command: [
+      "redis-server"
+    ]
+    ports:
+      - "6380:6379"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: my-rabbit
+    ports:
+      - "15673:15672"
+  
+  smtp:
+    image: rnwood/smtp4dev
+    ports:
+      - "3001:80"
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9412:9411"
