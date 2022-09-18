@@ -28,9 +28,9 @@ public class DaprHttpClient
         return await httpResponseMessage.Content.ReadFromJsonAsync<T>();
     }
 
-    public async Task<T?> GetStateAsync<T>(string storeName, string stateName)
+    public async Task<T?> GetStateAsync<T>(string storeName, string key)
     {
-        string stateRequestUri = $"v1.0/state/{storeName}/{stateName}";
+        string stateRequestUri = $"v1.0/state/{storeName}/{key}";
 
         var httpResponseMessage = await httpClient.GetAsync(stateRequestUri);
 
@@ -42,11 +42,11 @@ public class DaprHttpClient
         return await httpResponseMessage.Content.ReadFromJsonAsync<T>();
     }
 
-    public async Task PostStateAsync<T>(string storeName, string stateName, T value)
+    public async Task PostStateAsync<T>(string storeName, string key, T value)
     {
         var stateRequestUri = $"v1.0/state/{storeName}";
 
-        var httpResponseMessage = await httpClient.PostAsJsonAsync(stateRequestUri, new[] { new { key = stateName, value } });
+        var httpResponseMessage = await httpClient.PostAsJsonAsync(stateRequestUri, new[] { new { key = key, value } });
 
         httpResponseMessage.EnsureSuccessStatusCode();
     }
@@ -60,13 +60,12 @@ public class DaprHttpClient
         httpResponseMessage.EnsureSuccessStatusCode();
     }
 
-    public async Task InvokeBindingAsync<T>(string bindingName, T smtpPayload)
+    public async Task InvokeBindingAsync<T>(string bindingName, T payload)
     {
         var bindingRequestUri = $"v1.0/bindings/{bindingName}";
 
-        var httpResponseMessage = await httpClient.PostAsJsonAsync(bindingRequestUri, smtpPayload);
+        var httpResponseMessage = await httpClient.PostAsJsonAsync(bindingRequestUri, payload);
 
         httpResponseMessage.EnsureSuccessStatusCode();
     }
-
 }

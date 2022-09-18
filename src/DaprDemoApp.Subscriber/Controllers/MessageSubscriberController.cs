@@ -21,7 +21,7 @@ public class SubscriberController : ControllerBase
         var logInfo = $"Received message {cloudEvent.Data?.Content} from {cloudEvent.Source}";
         logger.LogInformation(message: logInfo);
 
-        await daprHttpClient.InvokeBindingAsync("smtp", new SmtpPayload { Operation = "create", Data = cloudEvent.Data?.Content });
+        await daprHttpClient.InvokeBindingAsync("notification", new Payload { Operation = "create", Data = cloudEvent.Data?.Content });
         logInfo = $"Invoked smtp binding successfully";
         logger.LogInformation(message: logInfo);
 

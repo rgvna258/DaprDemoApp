@@ -17,13 +17,13 @@ namespace DaprDemoApp.Web.Controllers
         {
             try
             {
-                var visitedCount = await daprHttpClient.GetStateAsync<int>("statestore", "visitedcount");
+                var refreshedCount = await daprHttpClient.GetStateAsync<int>("statestore", "refreshedcount");
 
-                visitedCount++;
+                refreshedCount++;
 
-                await daprHttpClient.PostStateAsync("statestore", "visitedcount", visitedCount);
+                await daprHttpClient.PostStateAsync("statestore", "refreshedcount", refreshedCount);
 
-                return View(new WithServiceHealthViewModel<int>(value: visitedCount));
+                return View(new WithServiceHealthViewModel<int>(value: refreshedCount));
             }
             catch (HttpRequestException)
             {
